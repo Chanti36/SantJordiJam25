@@ -1,0 +1,242 @@
+[gd_scene load_steps=15 format=3 uid="uid://kmth0ogvlqw0"]
+
+[ext_resource type="Script" path="res://scripts/gameCtrl.gd" id="1_ubmv2"]
+[ext_resource type="Script" path="res://scripts/gameplayCtrl.gd" id="2_r23xu"]
+[ext_resource type="Texture2D" uid="uid://0f5s5axqkjko" path="res://icon.svg" id="2_uxa0q"]
+[ext_resource type="Script" path="res://scripts/uiCtrl.gd" id="3_fgefc"]
+[ext_resource type="FontFile" uid="uid://blaky5wh6lvcv" path="res://misc/WinkyRough-VariableFont_wght.ttf" id="4_tef35"]
+[ext_resource type="Script" path="res://scripts/textSystem.gd" id="5_6q88j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0dack"]
+
+[sub_resource type="Animation" id="Animation_rn83e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -768)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_joowl"]
+resource_name = "transition_IN"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(4.28709, 4.2),
+"update": 0,
+"values": [Vector2(0, -768), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_de1nq"]
+resource_name = "transition_OUT"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(4.2, 4.2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -768)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Transition:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(4.2, 4.2),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjpfn"]
+_data = {
+"RESET": SubResource("Animation_rn83e"),
+"transition_IN": SubResource("Animation_joowl"),
+"transition_OUT": SubResource("Animation_de1nq")
+}
+
+[sub_resource type="Animation" id="Animation_2xr0d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ghljb"]
+resource_name = "introTransition"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 2.5),
+"transitions": PackedFloat32Array(4.2, 4.2),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6e41c"]
+_data = {
+"RESET": SubResource("Animation_2xr0d"),
+"introTransition": SubResource("Animation_ghljb")
+}
+
+[node name="GAME" type="Node2D"]
+position = Vector2(2, 0)
+script = ExtResource("1_ubmv2")
+
+[node name="GAMEPLAY" type="Node2D" parent="."]
+script = ExtResource("2_r23xu")
+
+[node name="Flower" type="Sprite2D" parent="GAMEPLAY"]
+modulate = Color(1, 0.596894, 0.563789, 1)
+position = Vector2(462, 303)
+scale = Vector2(0.635, 0.635)
+texture = ExtResource("2_uxa0q")
+
+[node name="Area2D" type="Area2D" parent="GAMEPLAY/Flower"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GAMEPLAY/Flower/Area2D"]
+shape = SubResource("CircleShape2D_0dack")
+
+[node name="RPG" type="Node2D" parent="."]
+
+[node name="spriteNPC" type="Sprite2D" parent="RPG"]
+position = Vector2(460, 308)
+texture = ExtResource("2_uxa0q")
+
+[node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(1024, 768)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_fgefc")
+
+[node name="Transition" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -768.0
+offset_bottom = -768.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Interface" type="TextureRect" parent="UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="[DEBUG_UI1]" type="ColorRect" parent="UI"]
+custom_minimum_size = Vector2(1024, 200)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+color = Color(0.717831, 0.655456, 0.475697, 1)
+
+[node name="[DEBUG_UI2]" type="ColorRect" parent="UI"]
+custom_minimum_size = Vector2(150, 768)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0.717831, 0.655456, 0.475697, 1)
+
+[node name="TextSystem" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(800, 150)
+layout_mode = 0
+offset_left = 31.0
+offset_top = 597.0
+offset_right = 71.0
+offset_bottom = 637.0
+theme_override_fonts/normal_font = ExtResource("4_tef35")
+theme_override_font_sizes/normal_font_size = 30
+text = "jashdajkshdaksjdhaksjd"
+fit_content = true
+scroll_active = false
+script = ExtResource("5_6q88j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_hjpfn")
+}
+
+[node name="INTROTRANSITION" type="AnimationPlayer" parent="."]
+root_node = NodePath("ColorRect")
+libraries = {
+"": SubResource("AnimationLibrary_6e41c")
+}
+
+[node name="ColorRect" type="ColorRect" parent="INTROTRANSITION"]
+custom_minimum_size = Vector2(1024, 768)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -510.0
+offset_top = -384.0
+offset_right = 514.0
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="SIG_finishedTransition" from="UI" to="." method="_on_ui_finished_transition"]
+[connection signal="SIG_midTransition" from="UI" to="." method="_on_ui_mid_transition"]
+[connection signal="SIG_finishedText" from="UI/TextSystem" to="." method="_on_text_display_finished"]
+[connection signal="animation_finished" from="UI/AnimationPlayer" to="UI" method="_on_animation_finished"]
+[connection signal="animation_finished" from="INTROTRANSITION" to="." method="_on_introtransition_finished"]

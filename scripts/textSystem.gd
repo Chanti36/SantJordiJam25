@@ -1,12 +1,14 @@
 extends RichTextLabel
 
 # 12 34 56
-var txt_char1_intro := "Hoal buenas."
-var txt_char1_outro := "xao"
-var txt_char2_intro := "Hoal buenas"
-var txt_char2_outro := "xao"
-var txt_char3_intro := "Hoal buenas"
-var txt_char3_outro := "xao"
+var txt_char1_intro := "Hoal 1."
+var txt_char1_outro := "xao1"
+var txt_char2_intro := "Hoal 2"
+var txt_char2_outro := "xao2"
+var txt_char3_intro := "Hoal 3"
+var txt_char3_outro := "xao3"
+var txt_char4_intro := "Hoal 4"
+var txt_char4_outro := "xao4"
 
 var txt_selected := ""
 
@@ -45,6 +47,7 @@ func _process(delta: float) -> void:
 	if !b_showingTxt:
 		return
 	f_charTimer += delta
+	print("asdasdasdasd")
 	
 	if i_charIndex < txt_selected.length():
 		if f_charTimer > f_charDelay:

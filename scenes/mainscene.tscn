@@ -1,11 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://kmth0ogvlqw0"]
+[gd_scene load_steps=21 format=3 uid="uid://kmth0ogvlqw0"]
 
 [ext_resource type="Script" path="res://scripts/gameCtrl.gd" id="1_ubmv2"]
 [ext_resource type="Script" path="res://scripts/gameplayCtrl.gd" id="2_r23xu"]
 [ext_resource type="Texture2D" uid="uid://0f5s5axqkjko" path="res://icon.svg" id="2_uxa0q"]
 [ext_resource type="Script" path="res://scripts/uiCtrl.gd" id="3_fgefc"]
+[ext_resource type="Texture2D" uid="uid://u45d8ggunuip" path="res://sprites/bg1.png" id="4_impad"]
 [ext_resource type="FontFile" uid="uid://blaky5wh6lvcv" path="res://misc/WinkyRough-VariableFont_wght.ttf" id="4_tef35"]
 [ext_resource type="Script" path="res://scripts/textSystem.gd" id="5_6q88j"]
+[ext_resource type="Texture2D" uid="uid://h7cpk57l20tj" path="res://sprites/borderBottom.png" id="5_n2eqb"]
+[ext_resource type="Texture2D" uid="uid://b82sblw2i8bcm" path="res://sprites/npc1.png" id="5_x0sqy"]
+[ext_resource type="Texture2D" uid="uid://5a8bur7o8ier" path="res://sprites/borderRight.png" id="6_rhy5b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dack"]
 
@@ -35,10 +39,22 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InterfaceBottom:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
-[sub_resource type="Animation" id="Animation_joowl"]
-resource_name = "transition_IN"
-length = 3.0
+[sub_resource type="Animation" id="Animation_3eva2"]
+resource_name = "transition_text_fadeout"
+length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -46,15 +62,27 @@ tracks/0/path = NodePath("Transition:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(4.28709, 4.2),
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(4.2, 4.2),
 "update": 0,
 "values": [Vector2(0, -768), Vector2(0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InterfaceBottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.76667, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 230)]
+}
 
-[sub_resource type="Animation" id="Animation_de1nq"]
-resource_name = "transition_OUT"
-length = 3.0
+[sub_resource type="Animation" id="Animation_vjsrr"]
+resource_name = "transition_text_fadein"
+length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -62,29 +90,87 @@ tracks/0/path = NodePath("Transition:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(4.2, 4.2),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -768)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("Transition:color")
+tracks/1/enabled = true
+tracks/1/path = NodePath("InterfaceBottom:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 2.26667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 230), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_knbso"]
+resource_name = "transition_play_fadeout"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InterfaceBottom:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 230)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(4.2, 4.2),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+"values": [Vector2(0, -767.996), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g0fi0"]
+resource_name = "transition_play_fadein"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InterfaceBottom:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 230)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(4.2, 4.2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -767.996)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hjpfn"]
 _data = {
 "RESET": SubResource("Animation_rn83e"),
-"transition_IN": SubResource("Animation_joowl"),
-"transition_OUT": SubResource("Animation_de1nq")
+"transition_play_fadein": SubResource("Animation_g0fi0"),
+"transition_play_fadeout": SubResource("Animation_knbso"),
+"transition_text_fadein": SubResource("Animation_vjsrr"),
+"transition_text_fadeout": SubResource("Animation_3eva2")
 }
 
 [sub_resource type="Animation" id="Animation_2xr0d"]
@@ -142,11 +228,22 @@ texture = ExtResource("2_uxa0q")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GAMEPLAY/Flower/Area2D"]
 shape = SubResource("CircleShape2D_0dack")
 
-[node name="RPG" type="Node2D" parent="."]
+[node name="RPG" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="spriteNPC" type="Sprite2D" parent="RPG"]
-position = Vector2(460, 308)
-texture = ExtResource("2_uxa0q")
+[node name="BG" type="TextureRect" parent="RPG"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_impad")
+
+[node name="NPC" type="TextureRect" parent="RPG"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_x0sqy")
 
 [node name="UI" type="Control" parent="."]
 custom_minimum_size = Vector2(1024, 768)
@@ -167,47 +264,37 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Interface" type="TextureRect" parent="UI"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="[DEBUG_UI1]" type="ColorRect" parent="UI"]
-custom_minimum_size = Vector2(1024, 200)
+[node name="InterfaceBottom" type="TextureRect" parent="UI"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-grow_vertical = 0
-color = Color(0.717831, 0.655456, 0.475697, 1)
-
-[node name="[DEBUG_UI2]" type="ColorRect" parent="UI"]
-custom_minimum_size = Vector2(150, 768)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-color = Color(0.717831, 0.655456, 0.475697, 1)
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_n2eqb")
 
 [node name="TextSystem" type="RichTextLabel" parent="UI"]
-custom_minimum_size = Vector2(800, 150)
+custom_minimum_size = Vector2(700, 150)
 layout_mode = 0
-offset_left = 31.0
-offset_top = 597.0
-offset_right = 71.0
-offset_bottom = 637.0
+offset_left = 58.0
+offset_top = 594.0
+offset_right = 758.0
+offset_bottom = 744.0
 theme_override_fonts/normal_font = ExtResource("4_tef35")
 theme_override_font_sizes/normal_font_size = 30
 text = "jashdajkshdaksjdhaksjd"
 fit_content = true
 scroll_active = false
 script = ExtResource("5_6q88j")
+
+[node name="InterfaceRight" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_rhy5b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
 libraries = {

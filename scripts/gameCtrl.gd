@@ -4,6 +4,9 @@ extends Node2D
 @onready var ui: Control = $UI
 @onready var textSystem: RichTextLabel = $UI/TextSystem
 
+@onready var bg = $RPG/BG
+@onready var npc = $RPG/NPC
+
 
 enum GameState { INTRONPC, GAMEPLAY, ENDINGNPC }
 var state := GameState.INTRONPC
@@ -20,8 +23,11 @@ func _ready() -> void:
 
 #FADE IN INTO SCENE
 func _on_introtransition_finished(anim_name: StringName) -> void:
+	if anim_name != "introTransition":
+		print("WHAT")
+		return
 	b_startgame = true
-	$UI/AnimationPlayer.play("transition_OUT")
+	$UI/AnimationPlayer.play("transition_text_fadein")
 #endregion
 
 
@@ -51,16 +57,22 @@ func _on_text_display_finished() -> void:
 
 
 func _on_ui_mid_transition() -> void:
-	if i_transitionCount ==  1 : $RPGprint.visible = false #prepare gameplay1
-	if i_transitionCount ==  2 : print("asd") #prepare out 1
-	if i_transitionCount ==  3 : print("asd") #prepare in 2
-	if i_transitionCount ==  4 : print("asd") #prepare gameplay2
-	if i_transitionCount ==  5 : print("asd") #prepare gameplay2
+	if i_transitionCount ==  1 : $RPG.visible = false #prepare gameplay1
+	if i_transitionCount ==  2 : print("ASD") #prepare out 1
+	if i_transitionCount ==  3 :  #prepare in 2
+		npc.texture = "res://sprites/npc2.png"
+		bg.texture = "res://sprites/bg2.png"
+	if i_transitionCount ==  4 : $RPG.visible = false #prepare gameplay2
+	if i_transitionCount ==  5 : print("ASD") #prepare gameplay2
 	if i_transitionCount ==  6 : print("asd") #prepare out 2
-	if i_transitionCount ==  7 : print("asd") #prepare in 3
-	if i_transitionCount ==  8 : print("asd") #prepare gameplay3
+	if i_transitionCount ==  7 :  #prepare in 3
+		npc.texture = "res://sprites/npc3.png"
+		bg.texture = "res://sprites/bg3.png"
+	if i_transitionCount ==  8 : $RPG.visible = false #prepare gameplay3
 	if i_transitionCount ==  9 : print("asd") #prepare out 3
-	if i_transitionCount == 10 : print("asd") #prepare in 4
+	if i_transitionCount == 10 : #prepare in 4
+		npc.texture = "res://sprites/npc4.png"
+		bg.texture = "res://sprites/bg4.png"
 	if i_transitionCount == 11 : print("asd") #prepare out 4
 	if i_transitionCount == 12 : print("asd") #prepare ending
 
@@ -68,13 +80,13 @@ func _on_ui_mid_transition() -> void:
 func _on_ui_finished_transition() -> void:
 	i_transitionCount += 1
 	if i_transitionCount ==  1: textSystem.StartConversation(1) #in 1
-	if i_transitionCount ==  2: print("gameplay 1")
+	if i_transitionCount ==  2: print("gameplay 1"); ui.DoTransition()
 	if i_transitionCount ==  3: textSystem.StartConversation(2) #out 1
 	if i_transitionCount ==  4: textSystem.StartConversation(3) #in 2
-	if i_transitionCount ==  5: print("gameplay 2")
+	if i_transitionCount ==  5: print("gameplay 2"); ui.DoTransition()
 	if i_transitionCount ==  6: textSystem.StartConversation(4) #out 2
 	if i_transitionCount ==  7: textSystem.StartConversation(5) #in 3
-	if i_transitionCount ==  8: print("gameplay 3")
+	if i_transitionCount ==  8: print("gameplay 3"); ui.DoTransition()
 	if i_transitionCount ==  9: textSystem.StartConversation(6) #out 3
 	if i_transitionCount == 10: textSystem.StartConversation(7) #in 4
 	if i_transitionCount == 11: textSystem.StartConversation(8) #out 4

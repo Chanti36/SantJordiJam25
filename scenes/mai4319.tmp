@@ -1,0 +1,438 @@
+[gd_scene load_steps=29 format=3 uid="uid://kmth0ogvlqw0"]
+
+[ext_resource type="Script" path="res://scripts/gameCtrl.gd" id="1_ubmv2"]
+[ext_resource type="Script" path="res://scripts/gameplayCtrl.gd" id="2_r23xu"]
+[ext_resource type="Texture2D" uid="uid://0f5s5axqkjko" path="res://icon.svg" id="2_uxa0q"]
+[ext_resource type="Script" path="res://scripts/uiCtrl.gd" id="3_fgefc"]
+[ext_resource type="Texture2D" uid="uid://u45d8ggunuip" path="res://sprites/rpg/bg1.png" id="4_impad"]
+[ext_resource type="FontFile" uid="uid://blaky5wh6lvcv" path="res://misc/WinkyRough-VariableFont_wght.ttf" id="4_tef35"]
+[ext_resource type="Script" path="res://scripts/textSystem.gd" id="5_6q88j"]
+[ext_resource type="Texture2D" uid="uid://h7cpk57l20tj" path="res://sprites/rpg/borderBottom.png" id="5_n2eqb"]
+[ext_resource type="Texture2D" uid="uid://b82sblw2i8bcm" path="res://sprites/rpg/npc1.png" id="5_x0sqy"]
+[ext_resource type="Texture2D" uid="uid://5a8bur7o8ier" path="res://sprites/rpg/borderRight.png" id="6_rhy5b"]
+[ext_resource type="Texture2D" uid="uid://dfr1a6pwrkqfo" path="res://sprites/rpg/UIrose.tres" id="11_foqwc"]
+[ext_resource type="Texture2D" uid="uid://dbeork4ji5myk" path="res://sprites/rpg/UIheart1.tres" id="11_okvi0"]
+[ext_resource type="Texture2D" uid="uid://bxjbesc6fmtn4" path="res://sprites/rpg/UIheart2.tres" id="12_2vwc8"]
+[ext_resource type="Texture2D" uid="uid://cv517t5mlcea1" path="res://sprites/rpg/UIcoin.tres" id="12_7ygf1"]
+[ext_resource type="FontFile" uid="uid://ctctqfamymu1w" path="res://misc/DMSerifText-Italic.ttf" id="13_2p8xd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0dack"]
+
+[sub_resource type="Animation" id="Animation_7u38c"]
+resource_name = "heartBump"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("12_2vwc8"), ExtResource("11_okvi0"), ExtResource("12_2vwc8"), ExtResource("11_okvi0"), ExtResource("12_2vwc8"), ExtResource("12_2vwc8")]
+}
+
+[sub_resource type="Animation" id="Animation_tbv8k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_okvi0")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kwtbb"]
+_data = {
+"RESET": SubResource("Animation_tbv8k"),
+"heartBump": SubResource("Animation_7u38c")
+}
+
+[sub_resource type="Animation" id="Animation_rn83e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -768)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InterfaceBottom:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g0fi0"]
+resource_name = "transition_play_fadein"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InterfaceBottom:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 230)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(4.2, 4.2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -767.996)]
+}
+
+[sub_resource type="Animation" id="Animation_knbso"]
+resource_name = "transition_play_fadeout"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InterfaceBottom:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 230)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(4.2, 4.2),
+"update": 0,
+"values": [Vector2(0, -767.996), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vjsrr"]
+resource_name = "transition_text_fadein"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(4.2, 4.2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -768)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InterfaceBottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.26667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 230), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3eva2"]
+resource_name = "transition_text_fadeout"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(4.2, 4.2),
+"update": 0,
+"values": [Vector2(0, -768), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InterfaceBottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.76667, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 230)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjpfn"]
+_data = {
+"RESET": SubResource("Animation_rn83e"),
+"transition_play_fadein": SubResource("Animation_g0fi0"),
+"transition_play_fadeout": SubResource("Animation_knbso"),
+"transition_text_fadein": SubResource("Animation_vjsrr"),
+"transition_text_fadeout": SubResource("Animation_3eva2")
+}
+
+[sub_resource type="Animation" id="Animation_2xr0d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ghljb"]
+resource_name = "introTransition"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 2.5),
+"transitions": PackedFloat32Array(4.2, 4.2),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6e41c"]
+_data = {
+"RESET": SubResource("Animation_2xr0d"),
+"introTransition": SubResource("Animation_ghljb")
+}
+
+[node name="GAME" type="Node2D"]
+position = Vector2(2, 0)
+script = ExtResource("1_ubmv2")
+
+[node name="GAMEPLAY" type="Node2D" parent="."]
+script = ExtResource("2_r23xu")
+
+[node name="Flower" type="Sprite2D" parent="GAMEPLAY"]
+modulate = Color(1, 0.596894, 0.563789, 1)
+position = Vector2(462, 303)
+scale = Vector2(0.635, 0.635)
+texture = ExtResource("2_uxa0q")
+
+[node name="Area2D" type="Area2D" parent="GAMEPLAY/Flower"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GAMEPLAY/Flower/Area2D"]
+shape = SubResource("CircleShape2D_0dack")
+
+[node name="RPG" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BG" type="TextureRect" parent="RPG"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_impad")
+
+[node name="NPC" type="TextureRect" parent="RPG"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_x0sqy")
+
+[node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(1024, 768)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_fgefc")
+
+[node name="Transition" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -768.0
+offset_bottom = -768.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="InterfaceBottom" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_n2eqb")
+
+[node name="TextSystem" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(700, 150)
+layout_mode = 0
+offset_left = 58.0
+offset_top = 594.0
+offset_right = 758.0
+offset_bottom = 744.0
+theme_override_fonts/normal_font = ExtResource("4_tef35")
+theme_override_font_sizes/normal_font_size = 30
+text = "jashdajkshdaksjdhaksjd"
+fit_content = true
+scroll_active = false
+script = ExtResource("5_6q88j")
+
+[node name="InterfaceRight" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_rhy5b")
+
+[node name="UIheart1" type="Sprite2D" parent="UI/InterfaceRight"]
+modulate = Color(1, 0, 0.211765, 1)
+position = Vector2(915, 287)
+texture = ExtResource("11_okvi0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/InterfaceRight/UIheart1"]
+libraries = {
+"": SubResource("AnimationLibrary_kwtbb")
+}
+autoplay = "heartBump"
+
+[node name="UIheart2" type="Sprite2D" parent="UI/InterfaceRight"]
+modulate = Color(1, 0, 0.211765, 1)
+position = Vector2(915, 367)
+texture = ExtResource("11_okvi0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/InterfaceRight/UIheart2"]
+libraries = {
+"": SubResource("AnimationLibrary_kwtbb")
+}
+autoplay = "heartBump"
+
+[node name="UIheart3" type="Sprite2D" parent="UI/InterfaceRight"]
+modulate = Color(1, 0, 0.211765, 1)
+position = Vector2(915, 447)
+texture = ExtResource("11_okvi0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/InterfaceRight/UIheart3"]
+libraries = {
+"": SubResource("AnimationLibrary_kwtbb")
+}
+autoplay = "heartBump"
+
+[node name="UIrose" type="Sprite2D" parent="UI/InterfaceRight"]
+modulate = Color(1, 0.0823529, 0.266667, 1)
+position = Vector2(878, 135)
+texture = ExtResource("11_foqwc")
+
+[node name="LabelRoses" type="Label" parent="UI/InterfaceRight"]
+layout_mode = 0
+offset_left = 928.0
+offset_top = 110.0
+offset_right = 968.0
+offset_bottom = 153.0
+theme_override_fonts/font = ExtResource("13_2p8xd")
+theme_override_font_sizes/font_size = 30
+text = "x 3"
+
+[node name="UIcoin" type="Sprite2D" parent="UI/InterfaceRight"]
+modulate = Color(1, 0.94902, 0.239216, 1)
+position = Vector2(877, 51)
+texture = ExtResource("12_7ygf1")
+
+[node name="LabelCoins" type="Label" parent="UI/InterfaceRight"]
+offset_left = 928.0
+offset_top = 29.0
+offset_right = 968.0
+offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("13_2p8xd")
+theme_override_font_sizes/font_size = 30
+text = "x 0"
+
+[node name="TransitionAnimator" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_hjpfn")
+}
+
+[node name="INTROTRANSITION" type="AnimationPlayer" parent="."]
+root_node = NodePath("ColorRect")
+libraries = {
+"": SubResource("AnimationLibrary_6e41c")
+}
+
+[node name="ColorRect" type="ColorRect" parent="INTROTRANSITION"]
+visible = false
+custom_minimum_size = Vector2(1024, 768)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -510.0
+offset_top = -384.0
+offset_right = 514.0
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="SIG_finishedTransition" from="UI" to="." method="_on_ui_finished_transition"]
+[connection signal="SIG_midTransition" from="UI" to="." method="_on_ui_mid_transition"]
+[connection signal="SIG_finishedText" from="UI/TextSystem" to="." method="_on_text_display_finished"]
+[connection signal="animation_finished" from="UI/InterfaceRight/UIheart1/AnimationPlayer" to="UI" method="_on_heart1_animation_finished"]
+[connection signal="animation_finished" from="UI/InterfaceRight/UIheart2/AnimationPlayer" to="UI" method="_on_heart2_animation_finished"]
+[connection signal="animation_finished" from="UI/InterfaceRight/UIheart3/AnimationPlayer" to="UI" method="_on_heart3_animation_finished"]
+[connection signal="animation_finished" from="UI/TransitionAnimator" to="UI" method="_on_animation_finished"]
+[connection signal="animation_finished" from="INTROTRANSITION" to="." method="_on_introtransition_finished"]

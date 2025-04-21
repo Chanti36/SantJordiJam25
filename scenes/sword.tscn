@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxcqipjrs7e7f"]
+
+[ext_resource type="Script" path="res://scripts/sword.gd" id="1_5hyss"]
+[ext_resource type="Texture2D" uid="uid://c51ef1tcm2b2t" path="res://sprites/game/sword.tres" id="2_j1kmp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vfj40"]
+radius = 18.1108
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rkrkv"]
+radius = 28.0713
+
+[node name="Sword" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_5hyss")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_j1kmp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vfj40")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_rkrkv")

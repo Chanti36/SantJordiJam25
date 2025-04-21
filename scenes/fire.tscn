@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://daq3snvh2rq4j"]
+
+[ext_resource type="Texture2D" uid="uid://begw2c6wrvh53" path="res://sprites/game/fire2.png" id="1_cg1fs"]
+[ext_resource type="Texture2D" uid="uid://ciyklj4virodv" path="res://sprites/game/fire1.png" id="1_dummv"]
+[ext_resource type="Script" path="res://scripts/fire.gd" id="1_qafwv"]
+[ext_resource type="Texture2D" uid="uid://d20mv72p4rgpb" path="res://sprites/game/fire3.png" id="3_owovu"]
+[ext_resource type="Texture2D" uid="uid://dcexenpogsre3" path="res://sprites/game/fire4.png" id="4_l7var"]
+[ext_resource type="Texture2D" uid="uid://bya1inmnkbjc4" path="res://sprites/game/fire5.png" id="5_ej6fe"]
+[ext_resource type="Texture2D" uid="uid://o7rquiccc75w" path="res://sprites/game/fire6.png" id="6_bidkn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vfj40"]
+radius = 18.1108
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rkrkv"]
+radius = 28.0713
+
+[sub_resource type="Animation" id="Animation_aixhe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_dummv")]
+}
+
+[sub_resource type="Animation" id="Animation_p3muc"]
+resource_name = "fire"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_dummv"), ExtResource("1_cg1fs"), ExtResource("3_owovu"), ExtResource("4_l7var"), ExtResource("5_ej6fe"), ExtResource("6_bidkn")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ldy53"]
+_data = {
+"RESET": SubResource("Animation_aixhe"),
+"fire": SubResource("Animation_p3muc")
+}
+
+[node name="Fire" type="RigidBody2D"]
+collision_layer = 2
+gravity_scale = 0.0
+script = ExtResource("1_qafwv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.207843, 0.188235, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_dummv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vfj40")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_rkrkv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ldy53")
+}
+autoplay = "fire"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

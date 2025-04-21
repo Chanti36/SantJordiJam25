@@ -1,18 +1,20 @@
 extends RichTextLabel
 
-# 12 34 56
-var txt_char1_intro := "Hoal 1."
-var txt_char1_outro := "xao1"
-var txt_char2_intro := "Hoal 2"
-var txt_char2_outro := "xao2"
-var txt_char3_intro := "Hoal 3"
-var txt_char3_outro := "xao3"
-var txt_char4_intro := "Hoal 4"
-var txt_char4_outro := "xao4"
+const txt_char1_intro := "Gracias por venir, pero ya se han llevado todo como han querido. Los dragones nos están asfixiando ¿Que se te está pasando por la cabeza?"
+const txt_char1_outro := "Estoy intentando juntar al resto para organizarnos a nivel local, hay que buscar una forma de no depender de los malditos dragones"
+
+const txt_char2_intro := "Al final no voy a poder quedar hoy. Estoy aquí liadísima que he tenido que coger unos turnos extra para ver si aguanto"
+const txt_char2_outro := "... si, lo se, estoy hablando con un sindicato, esto no puede seguir así"
+
+const txt_char3_intro := "Me han vuelto a subir el alquiler macho, no se que voy a hacer el mes que viene si aún debo este"
+const txt_char3_outro := "Realmente con la de casas que tiene para alquilar ni se dará cuenta si le okupo una"
+
+const txt_char4_intro := "Basta ya de tonterías! Deja de molestar a la gente!! Deberías esforzarte más igual así puedes llegar a mi puesto ¿No es eso lo que quieres? ¿Que pretendes hacer conmigo?"
+
 
 var txt_selected := ""
 
-var i_charIndex :=0
+var i_charIndex := 0
 
 var f_charDelay = 0.07
 var f_charTimer = 0.0
@@ -29,12 +31,13 @@ func _ready() -> void:
 	b_showingTxt = false
 
 func StartConversation(txtIndex : int):
-	if   txtIndex == 1:	txt_selected = txt_char1_intro
-	elif txtIndex == 2:	txt_selected = txt_char1_outro
-	elif txtIndex == 3:	txt_selected = txt_char2_intro
-	elif txtIndex == 4:	txt_selected = txt_char2_outro
-	elif txtIndex == 5:	txt_selected = txt_char3_intro
-	else:				txt_selected = txt_char3_outro
+	if   txtIndex == 1: txt_selected = txt_char1_intro
+	elif txtIndex == 2: txt_selected = txt_char1_outro
+	elif txtIndex == 3: txt_selected = txt_char2_intro
+	elif txtIndex == 4: txt_selected = txt_char2_outro
+	elif txtIndex == 5: txt_selected = txt_char3_intro
+	elif txtIndex == 6: txt_selected = txt_char3_outro
+	elif txtIndex == 7: txt_selected = txt_char4_intro
 	
 	i_charIndex = 0
 	f_charTimer = 0.0
@@ -43,11 +46,9 @@ func StartConversation(txtIndex : int):
 
 func _process(delta: float) -> void:
 	#txt_display.visible_characters
-	
 	if !b_showingTxt:
 		return
 	f_charTimer += delta
-	print("asdasdasdasd")
 	
 	if i_charIndex < txt_selected.length():
 		if f_charTimer > f_charDelay:
